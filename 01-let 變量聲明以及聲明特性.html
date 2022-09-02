@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01-let 變量聲明以及聲明特性</title>
+</head>
+<body>
+    <script>
+        //1. 聲明變量
+            // let a;
+            // let b, c, d;
+            // let e = 100;
+            // let f = 521, g = 'iloveyou', h = [];
+
+
+        //2. 變量不能重複聲明
+            // let star = '羅志祥';
+            // let star = '小豬';
+
+
+        //3. 塊級作用域
+            // {
+            //     let girl = '周揚青';
+            // }
+            // console.log(girl) // 報錯: girl is not defined
+        
+        
+        //4. 不存在變量提升
+            // console.log(song); // undefined
+            // var song = '戀愛達人';
+
+            // console.log(sing); // 報錯: Cannot access 'sing' before initialization
+            // let sing = '唱';
+
+
+        //5. 不影響作用域
+        {
+            let school = '尚硅谷'
+            function fn() {
+                console.log(school)
+            }   
+            fn()
+        }
+    </script>
+</body>
+</html>
