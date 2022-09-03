@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>22-Promise的介紹和基本使用</title>
+</head>
+<body>
+    <script>
+        // 1. 實例化 Promise 對象
+            // resolve: 解決；reject: 拒絕、否決。
+            const p = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    // 示範成功
+                        // let data = "數據庫讀取成功";
+                        // // 成功時，調用 resolve
+                        // resolve(data); 
+
+                    
+                    // 示範失敗
+                        let data = "數據庫讀取失敗";
+                        // 失敗時，調用 reject
+                        reject(data);
+                }, 1000);
+            });
+
+            p.then(
+                (value) => { // 成功時調用
+                    console.log(value);
+                },
+                (reason) => { // 失敗時調用
+                    console.log(reason);
+                }
+            )
+    </script>
+</body>
+</html>

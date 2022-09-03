@@ -1,0 +1,236 @@
+Jboss 是一個基於Java EE 的開放原始碼的應用服務器。用於構建、部屬和托管 java 應用程序和服務，那 J老闆有 LGPL 許可，
+所以可以在任何商業應用中免費使用，這也使得 JBoss 廣為流行。
+(換頁)
+
+
+為什麼需要使用 JBoss ?
+
+	JBoos 在 Tomcat 的基礎之上進行開發，讓我們的 J老闆青出於藍，更勝於藍 
+		- 能夠提供提供連線池服務
+		- 不僅支持 JSP 等Java 技術，同時還支持其他 Web 技術的集成，例如: PHP、.NET 。
+		- 快速的靜態內容處理。
+		- 集成了 OpenSSL，可以提供高效的安全傳輸服務，使得安全機制更上一層樓。
+		- 專業團隊的支持，讓來自開源社區的 J老闆，在在紅帽專業化開源的錘煉下，
+		在性能、擴展性、穩定性、安全性等方面，已成為一個達到企業級，紅帽不僅有專職的技術團隊投入JBoss Web的開發，
+		而且具備專門的QA團隊為產品作質量保證。
+(換頁)
+
+
+甚麼是 web 容器 ?
+	(畫第一張圖片)
+	早期的時候只會請求一些靜態資源，這時候需要一個伺服器來處理 HTTP 請求，並且將相應的靜態資源返回。
+	這個伺服器叫 HTTP 伺服器。簡單點說就是解析請求，然後得知需要伺服器上面哪個資料夾下哪個名字的靜態
+	檔案，找到返回即可。
+
+
+	(畫第二張圖片)
+	而隨著網際網路的發展，互動越發得重要，單純的靜態檔案滿足不了需求。
+	業務變得複雜，需要根據 HTTP 請求呼叫不同的業務邏輯來響應，但是我們
+	的業務程式碼總不能在 HTTP 伺服器裡面來做判斷到底需要呼叫哪個業務類吧？
+	所以需要做一層抽象，將 HTTP 的解析和具體的業務隔離。而業務千千萬，所以需要規定一個介面，
+	所以業務類都實現這個介面這樣才好對接。這個介面就是 Servlet，指的是用Java 編寫的服務端程式。
+
+
+	(畫第三張圖片)
+	剛剛是 Servlet 的由來，而 web 容器其實就是管理和載入這些 Servlet 類的，
+	拿到 HTTP 請求之後找到對應的 Servlet 類這就是 web 容器要做的事情。那我們
+	沒必要把 web 容器做的事情和具體的業務耦合起來，所以還可以抽一層出來做我們
+	的業務邏輯實現。
+
+
+	(回到 ppt 上)
+	ok 那大家現在應該對 web 容器有了更進一步的認識了。
+	1. 首先就是抽象出 HTTP 服務，用來通訊和解析協議。
+	2. 再因為業務的複雜，為了不和 HTTP 服務耦合又抽象了一層 Servlet 容器。
+	由 Servlet 容器，載入和管理 Servlet ，來控制請求轉發到指定的 Servlet 實現類。
+	3. 然後我們安心的開發業務即可。
+(換頁)
+
+
+
+
+待會介紹 JBoss 的主要有 6 個部分，安裝JDK、安裝 JBoss、JBoss 基本設定、添加 JDBC、添加 DataSource
+以及部屬 war 檔。
+(換頁)
+
+
+因為我們 JBoss 是基於 Java 的應用服務器，所以在安裝 JBoss 之前必須先確認自己是否已經安裝過 Java 了。
+這邊我們就先帶看一下如何安裝 OpenJDK。那安裝 OpenJDK 有以下 8 個步驟:
+
+1. 到 RedHat 官網下載 OpenJDK
+
+2. 創建一個 java 的目錄
+	sudo mkdir -p /usr/java/openjdk
+	mkdir: 就是英文 make directory 的簡寫，就是建立目錄
+	-p: 如果建立新目錄的上層目錄不存在，會自動建立。
+(換頁)
+
+
+3. 進入我們剛剛創建好的目錄
+	cd /usr/java/openjdk
+	cd: 切換目錄。
+
+4. 通過 xftp 將我們下載好的 JDK 上傳到 Linux 中我們剛剛創建的目錄
+(換頁)
+
+5. 解壓縮 jdk 壓縮包
+	sudo tar -xvf java-1.8.0-openjdk-portable-1.8.0.322.b06-4.portable.jdk.el.x86_64.tar.xz
+	tar: 可以針對文件或是目錄進行解壓或壓縮的操作。tar 指令究竟是用來壓縮還是解壓縮的，需要由我們的參數判斷。
+	-x: 表示解壓
+	-v: 顯示處理資訊
+	-f: 指定檔案
+
+6. 我們可以將剛剛解壓過後的檔案重新命名
+	sudo mv /usr/java/openjdk/java-1.8.0-openjdk-portable-1.8.0.322.b06-4.portable.jdk.el.x86_64 /usr/java/openjdk/java-1.8
+	mv: 表示重新命名
+(換頁)
+
+7. 設定 JAVA_HOME 環境變數
+	sudo sed -i '$a# OpenJDK 1.8' /etc/profile
+	sudo sed -i '$aexport JAVA_HOME=/usr/java/openjdk/java-1.8' /etc/profile
+	sudo sed -i '$aexport PATH=$PATH:$HOME/bin:$JAVA_HOME/bin' /etc/profile
+	這些指令的意思就是將我們配置的環境變量加入到 profile 檔案中，而這個 profile 檔案
+	就是有關 Linux 環境變數的東西。
+
+	sed: 可以利用腳本來處理文本文件
+	-i : 直接編輯原始檔案，取代原本內容
+
+8. 重新加載配置文件
+	source /etc/profile
+	讓/etc/profile檔案修改後立即生效
+
+
+以上步驟完成之後，我們就可以輸入 java -version 驗證我們的安裝情況。	
+裝好了 JDK 之後，我們接著就準備開始安裝 JBoss 了。
+(換頁)
+
+-----------------------------------------------------------------------------------------------------------
+安裝 JBoss 
+
+	
+我們安裝 JBoss 一共有 11 個步驟，這邊使用的指令跟剛剛安裝 OepnJDK 的時候所使用的指令，
+也有 87% 一樣。
+
+1. 首先去到 RedHat 官網下載 JBoss EAP 
+
+2. 創建用戶
+	sudo useradd jboss
+	sudo passwd jboss
+	如果以 root 用戶身分運行 JBoss 會存在安全隱患，所以我們需要創建一個新的用戶
+(換頁)
+
+
+3. 創建一個 JBoss 的目錄
+	sudo mkdir /opt/jboss-eap
+
+4. 進入我們剛剛創建好的目錄
+	cd /opt/jboss-eap
+(換頁)
+
+5. 通過 xftp 將我們下載好的 JBoss EAP 上傳到 Linux 中我們剛剛創建的目錄
+
+6. 解壓縮檔案
+	unzip jboss-eap-7.4.0.zip
+	unzip: 用於解壓文件。
+
+7. 授予訪問權限
+	sudo chown -R jboss.jboss /opt/jboss-eap
+	chown: 改變檔案的所有者和組別。
+	-R 表示指定目錄以及子目錄的所有文件
+	jboss 用戶和組需要對 jboss-eap 安裝目錄擁有所有權，以便可以訪問和運行 jboss
+(換頁)
+
+8. 產生 systemd 服務檔
+	這個步驟主要是因為我們服務器可能會遭遇到各種意外狀況，而導致程序崩潰，
+	一旦提供服務的應用程序崩潰了，就無法再繼續處理後續進來的請求，因此有個
+	能夠保證服務器能夠在崩潰或是被關閉之後自動重啟的機制也是很重要的。在 Linux 中我們
+	可以將任意應用程式變成開機可以自動執行，並且保證能夠在崩潰或是關閉之後自動重啟的服務。
+
+	要實現這樣的效果，我們需要將編寫的服務檔放在 /etc/systemd/system 目錄下
+(換頁)
+
+
+9. 重新載入服務程序的配置文件，讓剛剛編寫的服務檔生效
+	sudo systemctl daemon-reload
+
+10. 啟動服務
+	sudo systemctl start jboss-eap-7.4.service
+	因為啟動服務之後，我們無法直接得知服務到底有沒有執行成功，所以通常
+	還會再使用 systemctl status 指令來查看服務的狀態
+	sudo systemctl status jboss-eap-7.4.service
+
+11. 開機自啟動服務
+	sudo systemctl enable jboss-eap-7.4.service
+	確定運行都沒有問題了，我們就將 jboss 服務設置為開機自啟動
+(換頁)
+--------------------------------------------------------------------------------------------------------------------------------------
+JBoss 基本設定
+
+1. 增加 jboss 管理介面帳號
+	這個步驟我們將創建 jboss 用戶，而這個用戶是可以通過界面的方式去管理我們的服務器
+
+	su - jboss -> 切換使用者，因為我們已經將 /opt/jboss-eap 目錄的所有者改為 jboss
+	cd /opt/jboss-eap/jboss-eap-7.4/bin/ -> 進入到 bin 目錄下
+	./add-user.sh -> 運行 add-user/sh 
+(換頁)
+
+
+2. 調整可以對外連線
+	雖然到這一步，JBoss 已經啟動了，但是從本機 127.0.0.1 以外的地址去訪問 JBoss 是訪問不了的
+	，因為 jboss 默認只允許本機訪問，所以我們需要修改配置文件中 JBoss 監聽的地址
+
+	sed -i 's/jboss.bind.address.management:127.0.0.1/jboss.bind.address.management:0.0.0.0/g' /opt/jboss-eap/jboss-eap-7.4/standalone/configuration/standalone.xml
+	sed -i 's/<inet-address value="${jboss.bind.address:127.0.0.1}"/<inet-address value="${jboss.bind.address:0.0.0.0}"/g' /opt/jboss-eap/jboss-eap-7.4/standalone/configuration/standalone.xml
+
+(換頁)
+
+
+3. 調整 JVM 記憶體和時區
+	sed -i 's/JAVA_OPTS="-Xms1303m -Xmx1303m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true"/JAVA_OPTS="-Xms2048m -Xmx4096m -XX:MetaspaceSize=2048M -XX:MaxMetaspaceSize=4096m -Djava.net.preferIPv4Stack=true"/g' /opt/jboss-eap/jboss-eap-7.4/bin/standalone.conf
+	sed -i '/JAVA_OPTS="$JAVA_OPTS -Djboss.modules.system.pkgs=$JBOSS_MODULES_SYSTEM_PKGS -Djava.awt.headless=true"/a\ \ \ JAVA_OPTS="$JAVA_OPTS -Duser.timezone=Asia/Taipei"' /opt/jboss-eap/jboss-eap-7.4/bin/standalone.conf
+(換頁)
+
+------------------------------------------------------------------------------------------------------------------------------------------
+後面的添加 JDBC、添加 DataSource以及部屬 war 檔。流程都相對簡單，所以大家跟著我們的文檔一步一步做，
+基本上都沒有什麼問題，這邊就跟大家做一個簡單的講解。
+
+JBoss 建立資料連線
+	添加 JDBC Driver (使用 GUI 的方式)
+		1. 下載 JDBC 驅動程序。
+
+		2. 選擇上方導覽列的 Deployments  ->  +號  ->  Upload Deployment
+		這時候會有個小視窗會跳出來
+
+		3. 按下選擇檔案，選取我們要的 JDBC Driver 的 jar 檔
+
+		4. 確認檔案無誤，按下啟用。
+
+	
+	配置連線池
+		1. 點擊 configuration  -->  Subsystems  -->  Datasources&Drivers  -->  Datasources  -->  Add Datasource
+
+		2. 輸入 Name 和 JNDI Name，這裡的 JNDI Name 必須跟專案中所提到的 JNDI 一致
+
+		3. 選擇我們剛剛上傳的 Driver
+
+		4. 輸入數據庫的位置、帳號、密碼
+
+		5. 測試連線
+
+
+	部屬 war 檔
+		前置作業
+			1. 創建所需要的表和數據
+
+			2. 因為專案中需要有 DEMO 資料夾用於存放 log，所以我們要先創建 DEMO 資料夾，並賦予 jboss 執行權限
+
+		1. 選擇上方導覽列的 Deployments  ->  +號  ->  Upload Deployment
+		這時候會有個小視窗會跳出來
+
+		2. 按下選擇檔案，選取我們要部屬的 war 檔
+
+		3. 確認檔案無誤，按下啟用。
+
+
+OK，我的分享到此告一段落，現在我們就將主持的棒子交給，我們的小組長。
+請用熱烈的掌聲歡迎她。
