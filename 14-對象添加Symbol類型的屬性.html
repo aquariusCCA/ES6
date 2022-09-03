@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>14-對象添加Symbol類型的屬性.html</title>
+</head>
+<body>
+    <script>
+        // 1. 向對象中添加 up()、down() 方法 
+            let game = {
+                name: 'ran'
+            };
+
+            let methods = {
+                up: Symbol(),
+                down: Symbol()
+            };
+
+            // 以 Symbol 為鍵的物件屬性與陣列元素類似，
+            // 不能被類似 obj.name 的點運算符存取，
+            // 你必須使用方括號 [] 訪問這些屬性。
+            game[methods.up] = function() {
+                console.log('我可以改變形狀');
+            }
+
+            game[methods.down] = function() {
+                console.log('我可以快速下降');
+            }
+
+            console.log(game); // name: 'ran',Symbol(),Symbol()
+
+
+        // 2. 
+            let youxi = {
+                name: '狼人殺',
+                [Symbol('say')]: function() {
+                    console.log('我可以發言');
+                }, 
+                [Symbol('zibao')]: function() {
+                    console.log('我可以自爆');
+                }
+            }
+
+            console.log(youxi); // name:'狼人殺'、Symbol('say')、Symbol('zibao')
+    </script>
+</body>
+</html>

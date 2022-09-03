@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>09-函數參數的默認值設定.html</title>
+</head>
+<body>
+    <script>
+        //  ES6 允許給函數參數賦值初始值。
+
+        // 1. 型參初始化
+            function add(a, b, c = 10){
+                return a + b + c;    
+            }
+            // console.log(add(1, 2)); // 13
+
+            // 注意點: 具有默認值的參數，要放在最後一個位置。
+            function add2(a, b = 10, c) {
+                return a + b + c;
+            }
+            // console.log(add2(1, 2)) // NaN
+
+
+        // 2. 默認值可以與解構賦值結合
+            // 以前的寫法
+                // function connect(option) {
+                //     let host = option.host;
+                //     let username = option.name;
+                // }
+
+            // 跟解構賦值結合
+                function connect({host, username, password, port}){
+                    console.log(host);
+                    console.log(username);
+                    console.log(password);
+                    console.log(port);
+                }
+            
+            // 調用函數
+            connect({
+                host: 'localhost',
+                username: 'root',
+                password: 'root',
+                port: 3306
+            })
+
+             
+    </script>
+</body>
+</html>

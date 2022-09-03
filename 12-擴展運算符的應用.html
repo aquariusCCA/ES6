@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12-擴展運算符的應用.html</title>
+</head>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+
+
+    <script>
+        // 1. 數組的合併
+            // const kuaizi = ['王太利', '肖央'];
+            // const fenghuang = ['曾毅', '玲花'];
+            // 未使用
+                // const zuixuanxiaopingguo = kuaizi.concat(fenghuang);
+                // console.log(zuixuanxiaopingguo);
+            // 使用擴展運算符
+                // const zuixuanxiaopingguo2 = [...kuaizi, ...fenghuang];
+                // console.log(zuixuanxiaopingguo2);
+
+
+        // 2. 數組的克隆
+            // const sanzhihua = ['E', 'G', 'M'];
+            // const sanyecao = [...sanzhihua];
+            // console.log(sanyecao);
+
+
+        // 3. 將偽數組轉為真正的數組 
+            const divs = document.querySelectorAll('div');
+            console.log(divs);
+            const divArr = [...divs];
+            console.log(divArr);
+    </script>
+</body>
+</html>

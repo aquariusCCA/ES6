@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10-rest參數.html</title>
+</head>
+<body>
+    <script>
+        // ES6 引入 rest 参数，用于获取函数的实参，用来代替 arguments
+
+        // 1. ES5 獲取實參的方式
+            // function date() {
+            //     console.log(arguments); // arguments: 是一個對象。
+            // }
+            // console.log('白芷', '阿嬌', '思慧');
+
+
+        // 2. rest 參數
+            // function date(...args) {
+                // rest 參數是一個數組，也就意味著我們可以使用 filter、map ... 等 API。
+            //     console.log(args); 
+            // }
+            // date('白芷', '阿嬌', '思慧');
+
+
+        // 3. rest 參數必須要放到參數的最後。
+            // 錯誤: A rest parameter must be last in a parameter list.
+            // rest parameter 必须是参数列表中的最后一个。
+            // function fn(a, ...args, b) {
+            //     console.log(a);
+            //     console.log(args);
+            //     console.log(b);
+            // }
+    </script>
+</body>
+</html>

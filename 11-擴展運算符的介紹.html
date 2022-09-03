@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11-擴展運算符的介紹.html</title>
+</head>
+<body>
+    <script>
+        // 扩展运算符是能将数组转换为逗号分隔的参数序列。
+
+        // 1. 聲明一個數組。
+            const tfboys = ['易祥千璽', '王源', '王俊凱'];
+
+        // 2. 聲明一個函數
+            function chunwan(){
+                console.log(arguments);
+            }
+
+        // 3. 調用
+            // 這邊要看瀏覽器的控制台打印輸出的效果。
+            chunwan(tfboys);
+            chunwan(...tfboys); // => '易祥千璽', '王源', '王俊凱'
+    </script>
+</body>
+</html>
