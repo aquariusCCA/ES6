@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>17-跌代器的應用-自定義遍歷數據.html</title>
+</head>
+<body>
+    <script>
+        // 1. 聲明一個對象
+            const banji = {
+                name: '終極一班',
+                stus: [
+                    'xiaoming',
+                    'xiaoning',
+                    'xiaotian',
+                    'knight',
+                ],
+                [Symbol.iterator]() {
+                    return {
+                        
+                    }
+                }
+            }
+
+        // 2. 遍歷這個對象
+            for(let v of banji.stus){
+                console.log(v);
+            }
+    </script>
+</body>
+</html>

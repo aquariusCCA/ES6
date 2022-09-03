@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>16-跌代器介紹.html</title>
+</head>
+<body>
+    <script>
+        // 介紹
+        // 1. 迭代器(lterator)是一种接口，为各种不同的数据结构
+        // 提供统一的访问机制。任何数据结构只要部署 lterator 接口
+        // ，就可以完成遍历操作。
+
+        // 2. 原理：创建一个指针对象，指向数据结构的起始位置，
+        // 第一次调用 next() 方法，指针自动指向数据结构第
+        // 一个成员，接下来不断调用 next（），指针一直往后移动
+        // ，直到指向最后一个成员，没调用 next（）返回一个包含
+        // value 和 done 属性的对象。
+
+
+        // 1. 聲明一個數組
+            const xiyou = ['唐僧', '孫悟空', '豬八戒', '沙悟淨'];
+
+        // 2. 使用 for...of 遍歷數組
+            // for(let v of xiyou){
+            //     console.log(v);
+            // }
+
+        // 3. 
+            // a). 創建一個指針對象，指向當前數據結構的起始位置。
+            // b). 第一次調用對象的 next() 方法，指針自動指向數據結構的第一個成員
+            // c). 接下來不斷調用 next() 方法，指針一直往後移動，直到指針指向最後一個成員
+            // d). 每調用 next() 方法返回一個包含 value 和 done 屬性的對象
+            
+            // 回傳是一個迭代器 
+            let iterator = xiyou[Symbol.iterator]();
+
+            // 調用對象的 next() 方法
+            console.log(iterator.next());
+    </script>
+</body>
+</html>
