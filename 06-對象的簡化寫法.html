@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>06-對象的簡化寫法.html</title>
+</head>
+<body>
+    <script>
+        // ES6允许在大括号里面，直接写入变量和函数，
+        // 作为对象的属性和方法,这样的书写更加简洁。
+
+        // 1. 範例
+            let name = '尚硅谷';
+            let change = function() {
+                console.log('我們可以改變你!!!');
+            }
+
+            const school = {
+                name,
+                change,
+                // improve: function() { // 這是 ES5 的寫法。
+                //     console.log('我們可以提高你的技能!!!');
+                // }
+                improve() { // 這是 ES6 的寫法。
+                    console.log('我們可以提高你的性能!!!')
+                }
+            }
+
+            console.log(school)
+    </script>
+</body>
+</html>

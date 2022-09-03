@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03-const聲明常量以及特點.html</title>
+</head>
+<body>
+    <script>
+        // 1. 聲明常量(Constants)
+            // const SCHOOL = '尚硅谷';
+
+        
+        // 2. 一般常量使用大寫(淺規則)
+            // const a = 100; // 不建議
+
+
+        // 3. 常量的值不能修改
+            // const SCHOOL = '尚硅谷';
+            // 錯誤: Uncaught(没被捕获的) TypeError: Assignment(分配、指派) to constant variable(變量).
+            // 未发现的类型错误。对常量变量的赋值。
+            // SCHOOL = '黑馬程序員'; // 報錯
+
+        
+        // 4. 也具有塊級作用域
+            // {
+            //     const PLAYER = 'UZI';
+            // }
+            // 錯誤: Uncaught ReferenceError: PLAYER is not defined
+            // Reference: 提及、提到。
+            // 未发现的参考错误。PLAYER没有定义
+            // console.log(PLAYER); // 報錯
+
+
+        // 5. 對於數組和對象的修改，不算對常量的修改。
+                const TEAM = ['UZI', 'MXLG', 'Ming', 'Letme'];
+                TEAM.push('Meiko');
+    </script>
+</body>
+</html>

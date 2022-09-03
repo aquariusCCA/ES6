@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>07-箭頭函數以及特點.html</title>
+</head>
+<body>
+    <script>
+        // 介紹: ES6允许使用箭头（=>）定义函数
+
+        // 1. 之前聲明函數的寫法
+            // let fn = function() {
+            // }
+
+
+        // 2. ES6 的寫法
+            // let fn = (a, b) => {
+            //     return a + b;
+            // }
+
+            // 調用函數
+            // let result = fn(1, 2);
+            // console.log(result);
+
+
+        // 3. this 是靜態的，this 始終指向函數聲明時所在作用域下的 this 的值
+            // 創建函數
+            // function getName(){
+            //     console.log(this.name)
+            // }
+
+            // let getName2 = () => {
+            //     console.log(this.name)
+            // }
+
+            // 設置 window 對象的 name 屬性
+            // window.name = '尚硅谷';
+            // const school = {
+            //     name: "ATGUIGU"
+            // }
+
+            // 3-1. 直接調用
+                // getName(); // 尚硅谷
+                // getName2(); // 尚硅谷
+
+            // 3-2. call() 函數調用
+                // getName.call(school); // ATGUIGU
+                // getName2.call(school); // 尚硅谷
+
+
+        // 4. 不能作為構造實例化對象。
+            // let Person = (name, age) => {
+            //     this.name = name;
+            //     this.age = age;
+            // }
+
+            // let me = new Person('xiao', 25);
+            // 錯誤: Uncaught TypeError: Person is not a constructor(構造函數)
+            // 未发现的类型错误。Person不是一个构造函数。
+            // console.log(me); // 報錯
+
+
+        // 5. 不能使用 arguments(參數) 變量
+            // let fn = () => {
+                // 錯誤: Uncaught ReferenceError: arguments is not defined
+                // 未发现的参考错误：arguments 未被定义
+                // console.log(arguments); // 報錯
+            // }
+            // fn(1, 2, 3);
+
+
+        // 6. 箭頭函數的簡寫
+            // 6-1. 省略小括號: 當型參只有一個的時候。
+                // let add = n => {
+                //     return n + n;
+                // }
+                // console.log(add(9))
+                
+
+            // 6-2. 省略花括號: 當代碼體只有一條語句的時候，此時 return 必須省略；
+            // 而且語句的執行結果就是函數的返回值。
+                let pow = n => n * n;
+                console.log(pow(9));
+    </script>
+</body>
+</html>

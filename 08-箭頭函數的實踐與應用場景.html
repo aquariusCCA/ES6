@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>08-箭頭函數的實踐與應用場景.html</title>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            background: #58a;
+        }
+    </style>
+</head>
+<body>
+    <div id="ad">
+
+    </div>
+
+    <script>
+        // 需求1: 點擊 div 2s 後顏色變成粉色。
+            // 獲取元素
+            let ad = document.getElementById('ad'); 
+            // 綁定事件
+            ad.addEventListener("click", function(){
+                // 定時器
+                setTimeout(() => { // function() {
+                    // 修改背景顏色
+                        // 如下是錯誤寫法:
+                        // 報錯: Uncaught TypeError: Cannot set properties of undefined (setting 'background')
+                        // 未发现的类型错误。不能设置未定义的属性（设置 "背景"）
+                        // 因為此時的 this 是 window，而 window 是沒有 style 屬性的。
+                        // console.log(this)
+                        // this.style.background = 'pink';
+
+                        // 正確寫法: 將 setTimeout() 中的參數，使用箭頭函數。
+                        // 使用箭頭函數，此時的 this 就是 ad 元素。
+                            this.style.background = 'pink';
+                }, 2000)
+            })
+
+
+            
+        // 需求2: 從數組中返回偶數的元素。
+            // 定義一個數組(Array)。
+            const arr = [1, 6, 9, 10, 100, 25];
+
+            // 之前的寫法
+                // const result = arr.filter(function(item) {
+                //     if(item % 2 == 0){
+                //         return true;
+                //     }else{
+                //         return false;
+                //     }
+                // });
+                // console.log(result);
+
+            
+            // 使用箭頭函數
+                const result = arr.filter(item => item % 2 == 0);
+                console.log(result)
+    </script>
+</body>
+</html>

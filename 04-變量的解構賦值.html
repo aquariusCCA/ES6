@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04-變量的解構賦值.html</title>
+</head>
+<body>
+    <script>
+        // 介紹: ES6 允许按照一定模式从数组和对象中提取值，
+        // 对变量进行赋值，这被称为解构赋值。
+
+
+        // 1. 數組的解構(Deconstruction)
+            // const F4 = ['小沈陽', '劉能', '趙四', '宋小寶'];
+
+            // 將 F4 裡面的值依序賦值給 xiao、liu、zhao、song
+            // let [xiao, liu, zhao, song] = F4;
+            
+            // console.log(xiao);
+            // console.log(liu);
+            // console.log(zhao);
+            // console.log(song);
+
+
+        // 2. 對象的解構    
+            const zhao = {
+                name: '蕭士麟',
+                age: 25,
+                xiaopin: function() {
+                    console.log('我可以演小品');
+                }
+            }
+
+            let {name, age, xiaopin} = zhao;
+
+            console.log(name);
+            console.log(age);
+            console.log(xiaopin());
+
+    </script>
+</body>
+</html>
