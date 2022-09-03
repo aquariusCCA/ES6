@@ -5,6 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>18-生成器函數聲明和說明.html</title>
+    <!--
+        1. google 關鍵字: 生成器 js。
+        2. 原文網址:
+            - https://segmentfault.com/a/1190000023924834
+            - https://juejin.cn/post/6997955159158423582#heading-8
+    -->
 </head>
 <body>
     <script>
@@ -12,25 +18,25 @@
 
         // 1. 聲明
             // * 位置可以靠右或靠左
-            function* gen(){
-                console.log(111);
+            // function* gen(){
+            //     console.log(111);
 
-                yield '一只沒有耳多';
+            //     yield '一只沒有耳多';
 
                 // generator: 生產者
-                console.log('Hello generator');
+            //     console.log('Hello generator');
 
-                yield '一只沒有尾巴';
+            //     yield '一只沒有尾巴';
 
-                console.log(222);
+            //     console.log(222);
 
-                yield '真奇怪!';
+            //     yield '真奇怪!';
 
-                console.log(333);
-            }
+            //     console.log(333);
+            // }
 
             // 生成器本身就是迭代器
-            let iterator = gen();
+            // let iterator = gen();
             // console.log(iterator);
 
             // iterator.next(); // 111
@@ -39,10 +45,12 @@
             // iterator.next(); // 333
 
             // 遍歷
-            for(let v of gen()){
+            // for(let v of gen()){
                 // 111 -> 一只沒有耳多 -> Hello generator ->  一只沒有尾巴 -> 222 ->  真奇怪! -> 333
-                 console.log(v);  
-            }
+            //      console.log(v);  
+            // }
+
+
     </script>
 </body>
 </html>
