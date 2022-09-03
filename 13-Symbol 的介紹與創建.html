@@ -7,8 +7,9 @@
     <title>13-Symbol 的介紹與創建.html</title>
     <!-- 
     google 關鍵字: symbol js 用法。
-        1. 原文網址: https://juejin.cn/post/6845166891820908551
-        2. 原文網址: https://www.fooish.com/javascript/ES6/Symbol.html 
+        1. 原文網址: https://ithelp.ithome.com.tw/articles/10220499
+        2. 原文網址: https://pjchender.dev/javascript/js-symbols/ 
+        3. 原文網址: https://juejin.cn/post/6845166891820908551
     -->
 </head>
 <body>
@@ -26,19 +27,19 @@
 
 
         // 1. 創建 Symbol 
-            let s = Symbol();
+            // let s = Symbol();
             // console.log(s, typeof s);
 
             // Symbol() 每次都是新的，兩次生成的並不"相同"，無法在全域被搜尋。
-            let s2 = Symbol('尚硅谷');
-            let s3 = Symbol('尚硅谷');
+            // let s2 = Symbol('尚硅谷');
+            // let s3 = Symbol('尚硅谷');
             // console.log(s2 === s3); // false
 
 
         // 2. Symbol.for 創建
             // Symbol.for() 兩次生成的會是相同的，可以在全域被 Symbol.keyFor() 搜尋到。
-            let s4 = Symbol.for('尚硅谷');
-            let s5 = Symbol.for('尚硅谷');
+            // let s4 = Symbol.for('尚硅谷');
+            // let s5 = Symbol.for('尚硅谷');
             // console.log(s4 === s5); // true
 
 
@@ -47,6 +48,16 @@
             // 未发现的类型错误。无法将一个 Symbol 值转换为一个数字
             // let result = s + 100; // 報錯
             // console.log(result);
+
+
+        // 補充 Symbol
+        
+            // 因為類型 'typeof bunny' 與 'typeof rabbit' 未重疊，
+            // 所以此條件永遠會傳回 'false'。
+            // const bunny = Symbol();
+            // const rabbit = Symbol();
+            // console.log(bunny == rabbit);
+            // console.log(bunny == rabbit);
     </script>
 </body>
 </html>
