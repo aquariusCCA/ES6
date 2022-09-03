@@ -1,33 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>17-跌代器的應用-自定義遍歷數據.html</title>
+
+    <!--
+        1. google 搜尋關鍵字: 迭代器 js
+        2. 原文網址
+            - https://ithelp.ithome.com.tw/articles/10281225?sc=iThomeR
+            - https://juejin.cn/post/7018850645226569758
+    -->
 </head>
+
 <body>
     <script>
         // 1. 聲明一個對象
-            const banji = {
-                name: '終極一班',
-                stus: [
-                    'xiaoming',
-                    'xiaoning',
-                    'xiaotian',
-                    'knight',
-                ],
-                [Symbol.iterator]() {
+            let myObj = {
+                name: 'wendy',
+                age: 18,
+                hair: 'black',
+                [Symbol.iterator]: function () {
+                    let index = 0;
+                    let values = Object.values(this);
                     return {
-                        
-                    }
-                }
-            }
+                        next: () => ({
+                            value: values[index++],
+                            done: index > values.length
+                        }),
+                    };
+                },
+            };
 
         // 2. 遍歷這個對象
-            for(let v of banji.stus){
-                console.log(v);
+            let iterator = myObj[Symbol.iterator]();
+            console.log(iterator.next());//{ value: 'wendy', done: false }
+            console.log(iterator.next());//{ value: 18, done: false }
+            console.log(iterator.next());//{ value: 'black', done: false }
+            console.log(iterator.next());//{ value: undefined, done: true }
+
+            for (let y of myObj) {
+                console.log(y);
             }
+            //wendy
+            //18
+            //black
     </script>
 </body>
+
 </html>
