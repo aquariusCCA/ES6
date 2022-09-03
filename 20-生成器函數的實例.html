@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>20-生成器函數的實例.html</title>
+</head>
+<body>
+    <script>
+        // 需求: 1 秒後輸出 111，2 秒後輸出 222，3 秒後輸出 333。
+
+        // 回調地獄(也叫做波動拳)
+            // setTimeout(() => {
+            //     console.log('111');
+            //     setTimeout(() => {
+            //         console.log('222');
+            //         setTimeout(() => {
+            //             console.log('333');
+            //         }, 3000);
+            //     }, 2000);
+            // }, 1000);
+
+                
+        // 建議寫法
+            function one(){
+                setTimeout(() => {
+                    console.log('111');
+                    iterator.next();
+                }, 1000);
+            }
+
+            function two(){
+                setTimeout(() => {
+                    console.log('222');
+                    iterator.next();
+                }, 2000);
+            }
+
+            function three(){
+                setTimeout(() => {
+                    console.log('333');
+                    iterator.next();
+                }, 3000);
+            }
+        
+            function * gen(){
+                yield one();
+                yield two();
+                yield three();
+            }
+
+            // 調用生成器函數
+            let iterator = gen();
+            iterator.next();
+    </script>
+</body>
+</html>

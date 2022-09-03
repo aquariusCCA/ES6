@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>19-生成器函數的參數傳遞.html</title>
+</head>
+<body>
+    <script>
+        // 1. 聲明生成器對象
+            function *gen(arg){
+                console.log(arg);
+
+                let one = yield 111;
+                console.log(one);
+
+                let two = yield 222;
+                console.log(two);
+
+                yield 333;
+            }    
+
+        // 2. 執行獲取迭代器對象
+            // 整體參數的傳參
+            let iterator = gen('AAA');
+            console.log(iterator.next());
+            
+            // next() 方法可以傳入參數，將做執行完 yield 語句的返回結果。
+            console.log(iterator.next('BBB'));
+            console.log(iterator.next('CCC'));
+            console.log(iterator.next('DDD'));
+    </script>
+</body>
+</html>
