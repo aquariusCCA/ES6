@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>26-Set介紹與API.html</title>
+</head>
+<body>
+    <script>
+        // 1. 聲明一個 set
+            let s = new Set();
+            // console.log(s, typeof s);
+
+            // 會幫我們去重。
+            let s2 = new Set(['大事', '小事', '好事', '壞事', '小事']);
+            // console.log(s2);
+
+            // 添加新的元素
+            s2.add('喜事');
+            // console.log(s2);
+
+            // 刪除元素
+            s2.delete('壞事');
+            // console.log(s2);
+
+            // 檢查元素是否存在
+            // console.log(s2.has('喜事'));
+            // console.log(s2.has('糟事'));
+
+            // 清空
+            // s2.clear();
+            // console.log(s2);
+
+            // 循環遍歷
+            for(let v of s2){
+                console.log(v);
+            }
+
+    </script>
+</body>
+</html>
