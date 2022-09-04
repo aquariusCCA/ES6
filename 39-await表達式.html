@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>39-await表達式.html</title>
 </head>
+
 <body>
     <script>
 
@@ -16,24 +18,43 @@
         // 需要通過 try...catch 捕獲處理。
 
         // 1. 創建 Promise 對象
-            const p = new Promise((resolve, reject) => {
-                // resolve('用戶數據 !!');
-                reject('失敗拉 !!');
-            });
+        const p = new Promise((resolve, reject) => {
+            // resolve('用戶數據 !!');
+            reject('失敗拉 !!');
+        });
 
         // 2. await 要放在 async 函數中
-            async function main(){
-                try {
-                    let result = await p;
-    
-                    console.log(result);
-                } catch (error) {
-                    console.log(error);
-                }
-            }
+        // async function main() {
+        //     try {
+        //         let result = await p;
+
+        //         console.log(result);
+        //     } catch (error) {
+        //         console.log(error);
+        //     }
+        // }
 
         // 3. 調用函數
-            main();
+        // main();
+
+
+
+        function getSomething() {
+            return "something";
+        }
+
+        async function testAsync() {
+            return Promise.resolve("hello async");
+        }
+
+        async function test() {
+            const v1 = await getSomething();
+            const v2 = await testAsync();
+            console.log(v1, v2);
+        }
+
+        test();
     </script>
 </body>
+
 </html>
