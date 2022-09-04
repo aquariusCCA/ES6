@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>31-ES5構造函數繼承.html</title>
+</head>
+<body>
+    <script>
+        // 手機
+            function Phone(brand, price){
+                this.brand = brand;
+                this.price = price;
+            }
+
+            Phone.prototype.call = function(){
+                console.log('我可以改變世界 !!');
+            }
+
+
+        // 智能手機
+            function SmartPhone(brand, price, color, size){
+                Phone.call(this, brand, price);
+                this.color = color;
+                this.size = size;
+            }
+
+        
+        // 設置子級構造函數的原型
+            SmartPhone.prototype = new Phone;
+            SmartPhone.prototype.constructor = SmartPhone;
+
+
+        // 聲明子類的方法
+            SmartPhone.prototype.photo = function(){
+                console.log("我可以拍照");
+            }
+
+            SmartPhone.prototype.playGame = function(){
+                console.log("我可以玩遊戲");
+            }
+
+
+        // 創建對象
+            const chuizi = new SmartPhone('槌子', 2499, '黑色', '5.5inh');
+            console.log(chuizi);
+    </script>
+</body>
+</html>

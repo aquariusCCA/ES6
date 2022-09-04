@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>34-class中的getter和setter的設置.html</title>
+</head>
+<body>
+    <script>
+        // get 和 set 
+            class Phone{
+                get price(){
+                    console.log('價格屬性被讀取了 !!');
+                }
+
+                set price(newValue){
+                    console.log('價格屬性被修改了 !!!');
+                }
+            }
+
+
+        // 實例化對象
+            let s = new Phone();
+            // 錯誤: Uncaught TypeError: s.price is not a function
+            // console.log(s.price()); // 報錯
+            // console.log(s.price);
+
+            s.price = 'free';
+    </script>
+</body>
+</html>
