@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>39-await表達式.html</title>
+</head>
+<body>
+    <script>
+
+        // 1). await 必須寫在 async 函數中。
+        // 2). await 右側的表達式一般為 Promise 對象。
+        // 3). await 返回的式 Promise 成功的值。
+        // 4). await 的 Promise 失敗了，就會拋出異常，
+        // 需要通過 try...catch 捕獲處理。
+
+        // 1. 創建 Promise 對象
+            const p = new Promise((resolve, reject) => {
+                // resolve('用戶數據 !!');
+                reject('失敗拉 !!');
+            });
+
+        // 2. await 要放在 async 函數中
+            async function main(){
+                try {
+                    let result = await p;
+    
+                    console.log(result);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+
+        // 3. 調用函數
+            main();
+    </script>
+</body>
+</html>

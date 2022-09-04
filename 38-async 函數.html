@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>38-async 函數.html</title>
+</head>
+<body>
+    <script>
+        // async 函數
+            // 1). async 函數的返回值為 Promise 對象。
+            // 2). Promise 對象的結果由 async 函數執行的返回值決定。
+
+            async function fn(){
+                // 返回一個字符串
+                // 返回的結果不是一個 Promise 類型的對象，
+                // 返回的結果就是成功的 Promise 對象
+                    // return '尚硅谷';
+
+
+                // 拋出錯誤，返回的就是一個失敗的 Promise 對象
+                    // throw new Error('出錯拉 !!');
+
+
+                // 返回的結果是 Promise 對象
+                    return new Promise((resolve, reject) => {
+                        // resolve('成功的數據 !!');
+                        reject('失敗的數據 !!');
+                    });
+            }
+
+
+            const result = fn();
+            console.log(result);
+
+
+            // 調用 then 方法
+            result.then(
+                value => {
+                    console.log(value);
+                },
+                reason => {
+                    console.warn(reason);
+                }
+            ); 
+    </script>
+</body>
+</html>
