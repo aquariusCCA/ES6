@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>28-Map的介紹與API</title>
+</head>
+<body>
+    <script>
+        // 聲明 Map
+            let m = new Map();
+
+        // 添加元素
+            m.set('name', '尚硅谷');
+            m.set('change', function(){
+                console.log('我們可以改變你!!!');
+            });
+
+            let key = {
+                school: 'ATGUIGU'
+            };
+            m.set(key, ['北京', '上海', '深圳']);
+            // console.log(m);
+
+
+        // API
+            // 元素個數
+            // console.log(m.size);
+
+            // 刪除
+            // console.log(m.delete('name'));
+            // console.log(m);
+
+            // 獲取
+            // console.log(m.get('change'));
+            // console.log(m.get(key));
+
+            // 遍歷
+            for(let v of m){
+                console.log(v);
+            }
+
+    </script>
+</body>
+</html>
