@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        // 1. 通用的導入方式 
+            // 分別暴露
+                // 引入 m1.js 模塊內容
+                // import * as m1 from "./js/m1.js";
+                // console.log(m1);
+
+
+            // 統一暴露
+                // 引入 m2.js 模塊內容
+                // import * as m2 from './js/m2.js';
+                // console.log(m2);
+
+
+            // 默認暴露
+                // 引入 m3.js 模塊內容
+                // import * as m3 from './js/m3.js';
+                // console.log(m3);
+
+        
+        // 2. 解構賦值的形式
+            // 分別暴露
+                // import {school, teach} from './js/m1.js';
+                // console.log(school);
+                // console.log(teach);
+
+            // 統一暴露
+                // import {school as guigu, findJob} from './js/m2.js';
+                // console.log(guigu);
+                // console.log(findJob);
+
+            // 默認暴露
+                // import {default as m3} from './js/m3.js';
+                // console.log(m3);
+
+
+        // 3. 簡便形式: 僅能使用在默認暴露
+            // import m3 from './js/m3.js';
+            // console.log(m3);
+    </script>
+
+
+    <script src="./js/app.js" type="module"></script>
+</body>
+</html>
